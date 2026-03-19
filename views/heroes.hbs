@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Heroes</title>
+</head>
+<body>
+
+<h2>Heroes</h2>
+
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Attribute</th>
+    <th>Role</th>
+    <th>Difficulty</th>
+    <th>Created</th>
+  </tr>
+
+  {{#each heroes}}
+  <tr>
+    <td>{{id}}</td>
+    <td>{{name}}</td>
+    <td>{{primary_attribute}}</td>
+    <td>{{role}}</td>
+    <td>{{difficulty}}</td>
+    <td>{{created_at_date}} {{created_at_time}}</td>
+  </tr>
+  {{/each}}
+
+</table>
+
+</body>
+</html>
