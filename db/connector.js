@@ -22,7 +22,7 @@ createTableQueries.push(`
 );
    `);
 createTableQueries.push(`
-    CREATE TABLE IF NOT EXISTS sloniki1 (
+ CREATE TABLE IF NOT EXISTS sloniki1 (
     id SERIAL PRIMARY KEY,
     username TEXT NOT NULL UNIQUE,
     password_hash TEXT NOT NULL,
@@ -32,12 +32,10 @@ createTableQueries.push(`
    );
       `);
 
-
-for (let i = 0 ; i < createTableQueries.length ; i++){
+for (let i = 0; i < createTableQueries.length; i++) {
     console.log(`create string`)
     pool.query(createTableQueries[i]);
 }
-
 
       
 // const initializeDatabase = async () => {
@@ -54,6 +52,6 @@ for (let i = 0 ; i < createTableQueries.length ; i++){
 //    }
 // };
 
-console.log("CONNECTED!!!! ✔")
+console.log("CONNECTED!!!!!✅ ")
 
 export default pool;
