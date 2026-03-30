@@ -16,29 +16,37 @@
   </button>
 </div>
 
-<table border="1">
+<table border="1" style="border-collapse: collapse; text-align: left; width: 100%; max-width: 900px; color: white;">
   <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Primary Attribute</th>
-    <th>Role</th>
-    <th>Difficulty</th>
-    <th>Created</th>
-    <th>Actions</th>
+    <th style="padding: 8px;">ID</th>
+    <th style="padding: 8px;">Name</th>
+    <th style="padding: 8px;">Primary Attribute</th>
+    <th style="padding: 8px;">Role</th>
+    <th style="padding: 8px;">Difficulty</th>
+    <th style="padding: 8px;">Created</th>
+    <th style="padding: 8px;">Actions</th>
   </tr>
 
   {{#each heroes}}
   <tr>
-    <td>{{id}}</td>
-    <td>{{name}}</td>
-    <td>{{primary_attribute}}</td>
-    <td>{{role}}</td>
-    <td>{{difficulty}}</td>
-    <td>{{created_at_date}} {{created_at_time}}</td>
-    <td>
-      <button class="delete-hero-btn" data-id="{{id}}" style="background-color: #f44336; color: white; border: none; padding: 5px 10px; cursor: pointer;">
+    <td style="padding: 8px;">{{id}}</td>
+    <td style="padding: 8px;">{{name}}</td>
+    <td style="padding: 8px;">{{primary_attribute}}</td>
+    <td style="padding: 8px;">{{role}}</td>
+    <td style="padding: 8px;">{{attack_type}}</td>
+    <td style="padding: 8px;">{{created_at_date}} {{created_at_time}}</td>
+    <td style="padding: 8px;">
+      
+      <a href="/heroes/edit/{{id}}" style="text-decoration: none;">
+        <button style="background-color: #2196F3; color: white; border: none; padding: 5px 10px; cursor: pointer; margin-right: 5px; border-radius: 3px;">
+          Edit
+        </button>
+      </a>
+
+      <button class="delete-hero-btn" data-id="{{id}}" style="background-color: #f44336; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px;">
         Delete
       </button>
+
     </td>
   </tr>
   {{/each}}
