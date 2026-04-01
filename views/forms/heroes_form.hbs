@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{#if isEdit}}Edit Hero{{else}}Add Hero{{/if}}</title>
+  <style>
+    /* Базові налаштування у стилі iOS Dark Mode */
+    html, body {
+      background-color: #000000;
+      color: #F2F2F7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center; /* Зцентровано по вертикалі і горизонталі */
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    
+    /* Контейнер-картка */
+    .form-container {
+      background-color: #1C1C1E; /* Темно-сірий колір карток iOS */
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      max-width: 400px;
+      box-sizing: border-box;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #FFFFFF;
+      border-bottom: 1px solid #3A3A3C;
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    /* Стиль підписів як в iOS-налаштуваннях */
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #8E8E93;
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Поля вводу */
+    input[type="text"] {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px; /* Заокруглення як в iOS */
+      background-color: #2C2C2E; /* Світліший сірий для інпутів */
+      color: #FFFFFF;
+      box-sizing: border-box;
+      font-size: 16px; /* 16px запобігає автозуму на телефонах */
+      transition: box-shadow 0.2s ease, background-color 0.2s;
+    }
+
+    input[type="text"]::placeholder {
+      color: #636366;
+    }
+
+    /* Ефект підсвічування при введенні тексту (iOS Blue) */
+    input[type="text"]:focus {
+      outline: none;
+      background-color: #3A3A3C;
+      box-shadow: 0 0 0 2px #0A84FF; 
+    }
+
+    /* Головна кнопка */
+    .btn-submit {
+      background-color: #0A84FF; /* iOS Blue */
+      color: white;
+      padding: 14px 15px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      width: 100%;
+      margin-top: 10px;
+      font-size: 16px;
+      transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.2s;
+    }
+
+    /* Ефект збільшення при наведенні */
+    .btn-submit:hover {
+      transform: scale(1.03);
+      filter: brightness(1.1);
+    }
+
+    /* Посилання для скасування */
+    .cancel-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #0A84FF;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: filter 0.2s;
+    }
+
+    .cancel-link:hover {
+      filter: brightness(1.2);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>{{#if isEdit}}Edit Hero: {{hero.name}}{{else}}Add New Hero{{/if}}</h2>
+
+    <form action="{{#if isEdit}}/heroes/edit/{{hero.id}}{{else}}/heroes/add{{/if}}" method="POST">
+      
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="hero_name" value="{{hero.name}}" required placeholder="Впишіть ім'я героя">
+      </div>
+
+      <div class="form-group">
+        <label>Primary Attribute</label>
+        <input type="text" name="hero_class" value="{{hero.primary_attribute}}" required placeholder="Студент, викладач, робочий">
+      </div>
+
+      <div class="form-group">
+        <label>Role</label>
+        <input type="text" name="hero_role" value="{{hero.role}}" required placeholder="Підтримка, носій">
+      </div>
+
+      <div class="form-group">
+        <label>Difficulty</label>
+        <input type="text" name="attack_type" value="{{hero.attack_type}}" required placeholder="Моральний, фізичний">
+      </div>
+
+      <button type="submit" class="btn-submit">
+        {{#if isEdit}}Save Changes{{else}}Add Hero{{/if}}
+      </button>
+      
+      <a href="/heroes" class="cancel-link">Cancel and Go Back</a>
+    </form>
+  </div>
+
+</body>
+</html>
