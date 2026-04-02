@@ -9,21 +9,23 @@ const pool = new Pool({
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 
 const createTableQueries = [];
 createTableQueries.push(`
-    CREATE TABLE IF NOT EXISTS heroes1 (
-    id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL,              
-    primary_attribute TEXT,        
-    role TEXT,       
-    attack_type TEXT,           
-    difficulty INTEGER,                
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-   `);
+    CREATE TABLE IF NOT EXISTS heroes (
+        id SERIAL PRIMARY KEY,
+        name TEXT NOT NULL,              
+        primary_attribute TEXT,        
+        role TEXT,       
+        attack_type TEXT,          
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+`);
 createTableQueries.push(`
  CREATE TABLE IF NOT EXISTS sloniki (
     id SERIAL PRIMARY KEY,
@@ -42,27 +44,19 @@ createTableQueries.push(`
     price INT,
     quantity INT
     );
-    `)
+  `);
+
 createTableQueries.push(`
-    CREATE TABLE IF NOT EXISTS SLONIKI (
+ CREATE TABLE IF NOT EXISTS deadSpace (
     id SERIAL PRIMARY KEY,
-    username TEXT NOT NULL UNIQUE,
-    password_hash TEXT NOT NULL,
-    age TEXT NOT NULL,
-    place_of_birth TEXT NOT NULL,           
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    name_of_gun TEXT NOT NULL UNIQUE,
+    damage_type TEXT NOT NULL,
+    damage_dealth TEXT NOT NULL,
+    reload_seconds TEXT NOT NULL,           
+    additional_info TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP    
    );
-      `);
-
-
-
-
-
-
-
-
-
-      
+ 
 createTableQueries.push(`
  CREATE TABLE IF NOT EXISTS games_info (
     id SERIAL PRIMARY KEY,
@@ -71,7 +65,6 @@ createTableQueries.push(`
     cost TEXT NOT NULL,   
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-   `);
    
 for await (const query of createTableQueries) {
     try {
