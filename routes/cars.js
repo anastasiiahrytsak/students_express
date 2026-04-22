@@ -51,8 +51,9 @@ router.get('/new', (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const newCar = await CarService.createCar(req.body); 
-    res.status(201).json(newCar);
+    new CarValidator(req.body).validate();
+const newCar = await new CarService(req.body).create();
+    res.redirect('/cars');
   } catch (error) {
     console.error('Помилка при створенні машини:', error.message);
 
@@ -86,10 +87,8 @@ router.post('/edit/:id', async (req, res) => {
 
   try {
     
-    CarValidator.validate(req.body);
-
-  
-    await CarService.updateCar(carId, req.body);
+new CarValidator(req.body).validate();
+await new CarService(req.body).update(carId);
 
     res.redirect('/'); 
   } catch (error) {
@@ -102,7 +101,7 @@ router.post('/edit/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const carId = req.params.id;
   try {
-    await CarService.deleteCar(req.params.id);
+    await CarService.delete(req.params.id);
     res.status(200).json({ message: 'Машину успішно видалено!' });
   } catch (error) {
     console.error('Помилка при видаленні:', error.message);
