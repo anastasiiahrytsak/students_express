@@ -26,6 +26,7 @@ import barRouter from './routes/bar.js'
 import accountsRouter from './routes/accounts.js'
 import spotifyRouter from './routes/spotify.js';
 import notabugRouter from './routes/notabug.js'
+import turtleRouter from './routes/turtle.js';
 
 import { fileURLToPath } from 'url';
 
@@ -70,6 +71,7 @@ app.use('/accounts', accountsRouter);
 app.use('/spotify', spotifyRouter);
 app.use('/notabug', notabugRouter);
 app.use('/president',presidentRouter);
+app.use('/turtles', turtleRouter);
 
 app.use((err, req, res, next) => {
   console.error('Global error caught:', err || 'Unknown error');
