@@ -1,26 +1,24 @@
 import express from 'express';
-import { getAllClothing, addClothingItem, deleteClothingItem } from '../controllers/clothingController.js';
-
 const router = express.Router();
+import { getAllClothes, addClothing, deleteClothing } from '../controllers/clothingController.js';
 
-// Перегляд всього одягу
 router.get('/list', async (req, res) => {
-    try {
-        const items = await getAllClothing();
-        res.render('clothing_page', { items }); // Тобі треба буде створити таку в'юшку
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
+    const items = await getAllClothes();
+    res.render('clothing_page', { items });
 });
 
-// Видалення
+router.get('/create', (req, res) => {
+    res.render('forms/clothing_form', { title: 'Додати новий товар' });
+});
+
+router.post('/create', async (req, res) => {
+    await addClothing(req.body);
+    res.redirect('/clothing/list');
+});
+
 router.post('/delete/:id', async (req, res) => {
-    try {
-        await deleteClothingItem(req.params.id);
-        res.redirect('/clothing/list');
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
+    await deleteClothing(req.params.id);
+    res.redirect('/clothing/list');
 });
 
 export default router;
