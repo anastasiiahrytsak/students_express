@@ -66,7 +66,19 @@ createTableQueries.push(`
   `);
 
 createTableQueries.push(`
-    CREATE TABLE IF NOT EXISTS street_food_users (
+    CREATE TABLE IF NOT EXISTS pesyki (
+      id SERIAL PRIMARY KEY,
+      name TEXT NOT NULL,
+      breed TEXT NOT NULL,
+      age INTEGER NOT NULL,
+      vaccinated BOOLEAN DEFAULT FALSE,
+      shelter TEXT NOT NULL,
+      photo TEXT,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+  `);
+  createTableQueries.push(`
+  CREATE TABLE IF NOT EXISTS street_food_users (
         id SERIAL PRIMARY KEY,
         username TEXT UNIQUE NOT NULL,
         email TEXT UNIQUE NOT NULL,
@@ -292,6 +304,18 @@ createTableQueries.push ( `
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
    `);
+
+createTableQueries.push (`
+    CREATE TABLE IF NOT EXISTS turtles (
+  id SERIAL PRIMARY KEY,
+  name_of_turtle TEXT UNIQUE NOT NULL,
+  species TEXT NOT NULL,
+  habitat TEXT NOT NULL,
+  average_lifespan TEXT NOT NULL,
+  diet TEXT NOT NULL,
+  additional_info TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);`)
 
 for await (const query of createTableQueries) {
     try {
