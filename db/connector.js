@@ -283,6 +283,18 @@ createTableQueries.push(`
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 `);
+createTableQueries.push(`
+    DROP TABLE IF EXISTS clothing;
+
+    CREATE TABLE clothing (
+    id SERIAL PRIMARY KEY,
+    type VARCHAR(255),
+    brand VARCHAR(255),
+    size VARCHAR(50),
+    price DECIMAL(10, 2),
+    stock_quantity INTEGER DEFAULT 0
+);  
+`);
 
 createTableQueries.push(`
     CREATE TABLE IF NOT EXISTS kittens (
