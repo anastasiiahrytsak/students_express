@@ -344,6 +344,7 @@ createTableQueries.push (`
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );`)
 
+<<<<<<< HEAD
 createTableQueries.push(`
     CREATE TABLE IF NOT EXISTS pomidores (
         id SERIAL PRIMARY KEY,
@@ -355,6 +356,18 @@ createTableQueries.push(`
         is_organic BOOLEAN DEFAULT FALSE,
         country_of_origin TEXT,
         price_per_kg NUMERIC(6,2),
+=======
+
+createTableQueries.push(`
+    CREATE TABLE IF NOT EXISTS books (
+        id SERIAL PRIMARY KEY,
+        title TEXT NOT NULL,
+        author TEXT NOT NULL,
+        genre TEXT,
+        pages INTEGER,
+        price NUMERIC(10,2),
+        is_available BOOLEAN DEFAULT TRUE,
+>>>>>>> 81d47ff (add books)
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 `);
